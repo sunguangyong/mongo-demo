@@ -2,6 +2,7 @@ package model
 
 import (
 	"fmt"
+	"mongo-demo/internal/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -9,13 +10,6 @@ import (
 	"context"
 	"log"
 )
-
-type MongoConf struct {
-	Credential     options.Credential `json:"credential"`
-	Url            string             `json:"url"`
-	DbName         string             `json:"db_name"`
-	CollectionName string             `json:"collection_name"`
-}
 
 type defaultMongoReportDataModel struct {
 	Collection *mongo.Collection
@@ -35,7 +29,7 @@ type MongoReportDataModel interface {
 		data interface{}) (result *mongo.UpdateResult, err error)
 }
 
-func NewMongoReportDataModel(mongoConf MongoConf) MongoReportDataModel {
+func NewMongoReportDataModel(mongoConf config.MongoConf) MongoReportDataModel {
 	return &defaultMongoReportDataModel{
 		Collection: NewCollection(mongoConf),
 	}

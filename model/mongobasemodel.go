@@ -3,12 +3,13 @@ package model
 import (
 	"context"
 	"log"
+	"mongo-demo/internal/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func NewCollection(mongoConf MongoConf) (collection *mongo.Collection) {
+func NewCollection(mongoConf config.MongoConf) (collection *mongo.Collection) {
 	var err error
 
 	clientOptions := options.Client().ApplyURI(mongoConf.Url)
@@ -29,10 +30,5 @@ func NewFindOptions(pageNumber, pageSize int64) (option *options.FindOptions) {
 	option = options.Find()
 	option.SetLimit(int64(pageSize))
 	option.SetSkip(int64((pageNumber - 1) * pageSize))
-	return
-}
-
-func NewAggregateOptions(pageNumber, pageSize int64) (opts *options.AggregateOptions) {
-	opts = options.Aggregate()
 	return
 }

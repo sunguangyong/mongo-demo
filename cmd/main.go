@@ -1,13 +1,15 @@
-package cmd
+package main
 
 import (
+	"fmt"
+	"mongo-demo/internal/config"
 	"mongo-demo/model"
 
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func main() {
-	var mongoConf model.MongoConf
+	var mongoConf config.MongoConf
 	mongoConf.Url = "mongodb://82.157.202.19:27017"
 	mongoConf.DbName = "plc_test"
 	mongoConf.CollectionName = "report_data"
@@ -17,5 +19,6 @@ func main() {
 	}
 
 	collection := model.NewCollection(mongoConf)
+	fmt.Println(collection)
 
 }
