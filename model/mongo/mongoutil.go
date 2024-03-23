@@ -1,9 +1,11 @@
-package model
+package mongo
 
 import (
 	"context"
 	"log"
 	"mongo-demo/internal/config"
+
+	"go.mongodb.org/mongo-driver/bson"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -30,5 +32,11 @@ func NewFindOptions(pageNumber, pageSize int64) (option *options.FindOptions) {
 	option = options.Find()
 	option.SetLimit(int64(pageSize))
 	option.SetSkip(int64((pageNumber - 1) * pageSize))
+	return
+}
+
+// NewSortOptions order 1 升序 -1 降序
+func NewSortOptions(key string, order int) (option *options.FindOptions) {
+	option = options.Find().SetSort(bson.D{{key, order}})
 	return
 }

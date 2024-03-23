@@ -2,15 +2,15 @@ package svc
 
 import (
 	"mongo-demo/internal/config"
-	"mongo-demo/model"
+	"mongo-demo/model/mongo"
 )
 
 type ServiceContext struct {
-	MongoReportData model.MongoReportDataModel
+	MongoReportDataConn mongo.MongoReportDataModel
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
-		MongoReportData: model.NewMongoReportDataModel(c),
+		MongoReportDataConn: mongo.NewMongoReportDataModel(c.ReportDataMongo),
 	}
 }
