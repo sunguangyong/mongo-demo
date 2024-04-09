@@ -32,7 +32,7 @@ func init() {
 
 func main() {
 	ctx := context.Background()
-	//AggregateDemo(ctx)
+	AggregateDemo(ctx)
 	FindDemo(ctx)
 	//InsertDemo(ctx)
 	//UpdateDemo(ctx)
